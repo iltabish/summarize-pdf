@@ -1,0 +1,62 @@
+body {
+    background-color: #f4f6f9;
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+}
+
+#fileUpload {
+    display: block;
+    margin: 20px 0;
+    padding: 10px;
+    border: 2px solid #007bff;
+    border-radius: 5px;
+    background-color: #ffffff;
+    cursor: pointer;
+}
+
+button {
+    padding: 12px 20px;
+    margin: 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.Summarize {
+    background-color: #007bff;
+    color: white;
+}
+
+.Download {
+    background-color: #28a745;
+    color: white;
+}
+
+button:hover {
+    opacity: 0.8;
+}
+
+#content {
+    max-width: 800px; 
+    min-width: 300px; 
+    background-color: #fdfdfd; 
+    border-radius: 8px; 
+    margin: 20px auto; 
+    border: 1px solid #ddd; 
+    font-family: "Arial", sans-serif;
+    font-size: 16px;
+    color: #222;
+    padding: 20px;
+    line-height: 1.6;
+    text-align: justify;
+    box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.1); 
+    word-wrap: break-word; 
+  }
+  
