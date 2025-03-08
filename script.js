@@ -2,6 +2,7 @@
 let url="https://api.apyhub.com/ai/summarize-documents/file";
 let btn1=document.querySelector(".Summarize");
 let btn2=document.querySelector(".Download");
+let content=document.querySelector("#content");
 
     btn1.addEventListener("click",async ()=>{
     let fileInput=document.querySelector("#fileUpload");
@@ -12,10 +13,16 @@ let btn2=document.querySelector(".Download");
         alert('Please Upload File');
         return;
     }
+  
     let formData=new FormData();
     formData.append("file",file);
     formData.append("summary_length", "medium"); 
     formData.append("output_language", "en"); 
+    try{
+
+        btn1.disabled = true;
+        btn1.innerText = "Summarizing...";
+        content.innerHTML = "<p>Please wait, summarizing the document...</p>";
 
     let response=await fetch(url,{
        method:"POST",
@@ -24,12 +31,23 @@ let btn2=document.querySelector(".Download");
     },
        body:formData
     });
-
-    console.log(response);
     let data=await response.json();
-    let element=document.querySelector("#content");
-    element.innerText=data.data.summary;
-    console.log(data.data.summary);
+
+    if(!response.ok){
+        if (data.message && data.message.includes("free limit")) {
+            alert("You have reached the free limit of 5 API calls. Please try again tomorrow.");
+        } else {
+            alert("An error occurred while processing your request. Please try again later.");
+        }
+        return;
+    }
+    content.innerText=data.data.summary;
+}catch(error){
+    alert("Something went wrong. Please check your internet connection and try again.");
+}finally{
+    btn1.disabled = false;
+    btn1.innerText = "Let Summarize";
+}
 });
 const generatePdf=()=>{
     let element=document.querySelector("#content");
@@ -38,5 +56,5 @@ const generatePdf=()=>{
     }else{
         alert('Please first upload file');
     }
-}
+};
 btn2.addEventListener("click",generatePdf);
